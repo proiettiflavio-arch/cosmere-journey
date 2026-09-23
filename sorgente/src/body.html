@@ -1,0 +1,77 @@
+<div class="stars-layer stars-far" aria-hidden="true"></div>
+<div class="stars-layer stars-mid" aria-hidden="true"></div>
+<main class="app">
+  <header class="topbar">
+    <a class="brand" href="index.html" style="text-decoration:none">Cosmere<span>Journey</span></a>
+    <button class="iconbtn" id="reset" aria-label="Azzera progresso">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 4v6h6M20 20v-6h-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 15a8 8 0 0 0 13.9 3M18.5 9A8 8 0 0 0 4.6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </header>
+
+  <section class="intro" id="home">
+    <span class="eyebrow">Registro di viaggio</span>
+    <h1>Entra nel <em>Cosmere.</em></h1>
+    <p class="lede">Un percorso personale tra mondi, saghe e novelle. Segna ciò che hai letto: ogni libro accende un astro sulla carta e l'app ti indica la prossima osservazione.</p>
+  </section>
+
+  <section class="chart" id="chart" aria-labelledby="chartTitle">
+    <div class="chart-top"><span id="chartTitle">Carta del Cosmere</span><span id="chartCount"></span></div>
+    <div id="chartSvg"></div>
+    <div class="chart-foot">
+      <div class="legend" aria-hidden="true"><span><i class="l-read"></i>letto</span><span><i class="l-todo"></i>da leggere</span><span><i class="l-next"></i>prossimo</span></div>
+      <div class="offmap" id="offmap"></div>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Letture">
+    <div class="stat"><b id="readCount">0</b><span>letti</span></div>
+    <div class="stat"><b id="worldCount">0</b><span>mondi</span></div>
+    <div class="stat"><b id="remaining">0</b><span>da leggere</span></div>
+  </section>
+
+  <section class="section" id="journey">
+    <div class="section-head"><h2>Prossimo step</h2><p id="status">Pronto a partire</p></div>
+    <div class="next" id="nextCard"></div>
+  </section>
+
+  <section class="section" id="blog">
+    <div class="section-head"><h2>Dal blog dell'autore</h2>
+      <button type="button" class="refresh" id="blogRefresh" aria-busy="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M20 4v4.5h-4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Aggiorna</button>
+    </div>
+    <div class="blog-list" id="blogPosts"></div>
+    <a class="blog-more" href="https://www.brandonsanderson.com/blogs/blog" target="_blank" rel="noopener noreferrer">Vedi tutti i post →</a>
+  </section>
+
+  <section class="section" id="worlds">
+    <div class="section-head"><h2>Catalogo dei mondi</h2></div>
+    <div class="worlds" id="worldChips"></div>
+  </section>
+
+  <section class="section" id="progress">
+    <div class="section-head"><h2>Il tuo percorso</h2><p id="pathCount"></p></div>
+    <div id="filterBar"></div>
+    <div class="path" id="path"></div>
+  </section>
+
+  <div class="divider"></div>
+</main>
+
+<nav class="bottomnav" aria-label="Navigazione principale">
+  <a class="navbtn {{NAV_home}}" href="index.html" aria-current="{{CUR_home}}">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M4 11.5 12 4l8 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Home
+  </a>
+  <a class="navbtn {{NAV_blog}}" href="blog.html" aria-current="{{CUR_blog}}">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M5 6.5h14v11H5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 10h8M8 13.5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Blog
+  </a>
+  <a class="navbtn {{NAV_worlds}}" href="mondi.html" aria-current="{{CUR_worlds}}">
+    <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="12" rx="9" ry="4.6" stroke="currentColor" stroke-width="1.3"/><ellipse cx="12" cy="12" rx="4.6" ry="2.3" stroke="currentColor" stroke-width="1.3"/><circle cx="19.2" cy="9.4" r="1.4" fill="currentColor"/><circle cx="8.2" cy="14" r="1.1" fill="currentColor"/></svg>
+    Mondi
+  </a>
+  <a class="navbtn {{NAV_progress}}" href="percorso.html" aria-current="{{CUR_progress}}">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M5 6h14M5 12h14M5 18h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="19" cy="18" r="1.4" fill="currentColor"/></svg>
+    Percorso
+  </a>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
