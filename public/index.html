@@ -205,8 +205,8 @@ body[data-page="worlds"] .stats{display:none}
 .blog-post{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:16px 0;border-top:1px solid var(--grid);text-decoration:none}
 .blog-post:last-child{border-bottom:1px solid var(--grid)}
 .blog-post-date{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--inst)}
-.blog-post-title{font-family:var(--display);font-size:21px;line-height:1.14;margin-top:5px;color:var(--light)}
-.blog-post-excerpt{font-size:13px;color:var(--dim);margin-top:6px;line-height:1.55}
+.blog-post-title{font-family:var(--display);font-size:21px;line-height:1.14;margin-top:5px;color:var(--light);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.blog-post-excerpt{font-size:13px;color:var(--dim);margin-top:6px;line-height:1.55;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 .blog-post-arrow{font-family:var(--mono);color:var(--quiet);font-size:15px;transition:color .15s,transform .15s}
 .blog-post:hover .blog-post-arrow{color:var(--inst);transform:translateX(2px)}
 .blog-more{display:inline-block;margin-top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--inst);text-decoration:none}
@@ -855,6 +855,16 @@ function cleanBlogText(value){
   return (box.textContent || "").replace(/\s+/g," ").trim();
 }
 
+// Questa sezione è solo un rimando al blog vero: l'estratto va troncato
+// a una lunghezza fissa, perché alcuni articoli espongono nel feed il
+// contenuto intero invece di un breve riassunto.
+function truncateBlogText(text, max){
+  if(text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  return (lastSpace > max*0.6 ? cut.slice(0, lastSpace) : cut).trim() + "…";
+}
+
 function parseBlogFeed(xmlText){
   const xml = new DOMParser().parseFromString(xmlText,"application/xml");
   if(xml.querySelector("parsererror")) throw new Error("Feed non valido");
@@ -874,7 +884,7 @@ function parseBlogFeed(xmlText){
     return {
       t: title,
       d: blogDate(date),
-      n: summary || "Nuovo articolo sul blog di Brandon Sanderson.",
+      n: truncateBlogText(summary || "Nuovo articolo sul blog di Brandon Sanderson.", 140),
       u: url
     };
   }).filter(p=>p.t && /^https:\/\/www\.brandonsanderson\.com\//i.test(p.u));

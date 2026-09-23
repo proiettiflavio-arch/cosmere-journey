@@ -28,6 +28,16 @@ function cleanBlogText(value){
   return (box.textContent || "").replace(/\s+/g," ").trim();
 }
 
+// Questa sezione è solo un rimando al blog vero: l'estratto va troncato
+// a una lunghezza fissa, perché alcuni articoli espongono nel feed il
+// contenuto intero invece di un breve riassunto.
+function truncateBlogText(text, max){
+  if(text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  return (lastSpace > max*0.6 ? cut.slice(0, lastSpace) : cut).trim() + "…";
+}
+
 function parseBlogFeed(xmlText){
   const xml = new DOMParser().parseFromString(xmlText,"application/xml");
   if(xml.querySelector("parsererror")) throw new Error("Feed non valido");
@@ -47,7 +57,7 @@ function parseBlogFeed(xmlText){
     return {
       t: title,
       d: blogDate(date),
-      n: summary || "Nuovo articolo sul blog di Brandon Sanderson.",
+      n: truncateBlogText(summary || "Nuovo articolo sul blog di Brandon Sanderson.", 140),
       u: url
     };
   }).filter(p=>p.t && /^https:\/\/www\.brandonsanderson\.com\//i.test(p.u));

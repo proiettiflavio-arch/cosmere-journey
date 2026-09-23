@@ -165,8 +165,8 @@ body[data-page="worlds"] .stats{display:none}
 .blog-post{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:16px 0;border-top:1px solid var(--grid);text-decoration:none}
 .blog-post:last-child{border-bottom:1px solid var(--grid)}
 .blog-post-date{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--inst)}
-.blog-post-title{font-family:var(--display);font-size:21px;line-height:1.14;margin-top:5px;color:var(--light)}
-.blog-post-excerpt{font-size:13px;color:var(--dim);margin-top:6px;line-height:1.55}
+.blog-post-title{font-family:var(--display);font-size:21px;line-height:1.14;margin-top:5px;color:var(--light);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.blog-post-excerpt{font-size:13px;color:var(--dim);margin-top:6px;line-height:1.55;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 .blog-post-arrow{font-family:var(--mono);color:var(--quiet);font-size:15px;transition:color .15s,transform .15s}
 .blog-post:hover .blog-post-arrow{color:var(--inst);transform:translateX(2px)}
 .blog-more{display:inline-block;margin-top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--inst);text-decoration:none}
