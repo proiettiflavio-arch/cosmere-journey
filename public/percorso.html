@@ -161,6 +161,12 @@ body[data-page="worlds"] .chart .lbl{font-size:8.6px}
 .section-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px}
 .section-head h2{font-size:29px;letter-spacing:-.005em}
 .section-head p{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);text-align:right}
+/* #journey non ha piu' un h2: lo stato resta l'unico elemento, allineato a destra come prima */
+#journey .section-head{justify-content:flex-end}
+
+/* Riassunto letture: solo su Home e Percorso, dove ha senso come contesto */
+body[data-page="blog"] .stats,
+body[data-page="worlds"] .stats{display:none}
 
 /* ---------- Prossima osservazione ---------- */
 .next{border:1px solid var(--grid2);border-radius:var(--r);padding:18px 16px 16px;background:linear-gradient(180deg,rgba(16,24,40,.75),rgba(11,17,28,.55))}
@@ -317,11 +323,10 @@ body[data-page="worlds"] .chart .lbl{font-size:8.6px}
   body[data-page="worlds"] .app{
     display:grid;column-gap:36px;align-items:start;
     grid-template-columns:minmax(300px,1fr) minmax(380px,1.3fr);
-    grid-template-areas:"topbar topbar" "chart worlds" "stats worlds" "divider divider";
+    grid-template-areas:"topbar topbar" "chart worlds" "divider divider";
   }
   body[data-page="worlds"] .topbar{grid-area:topbar}
   body[data-page="worlds"] #chart{grid-area:chart}
-  body[data-page="worlds"] .stats{grid-area:stats;margin-bottom:0}
   body[data-page="worlds"] #worlds{grid-area:worlds}
   body[data-page="worlds"] .divider{grid-area:divider}
 
@@ -676,7 +681,7 @@ body{background:#06090F!important}
   </section>
 
   <section class="section" id="journey">
-    <div class="section-head"><h2>Prossimo step</h2><p id="status">Pronto a partire</p></div>
+    <div class="section-head"><p id="status">Pronto a partire</p></div>
     <div class="next" id="nextCard"></div>
   </section>
 
