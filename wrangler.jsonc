@@ -1,0 +1,9 @@
+{
+  // Cosmere Journey: sito statico servito dal Worker "cosmerejourney".
+  // Il nome deve coincidere con quello del Worker su Cloudflare.
+  "name": "cosmerejourney",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./public"
+  }
+}
