@@ -223,3 +223,80 @@ body[data-page="worlds"] .chart .lbl{font-size:8.6px}
   .section-head h2{font-size:34px}
   .stat b{font-size:26px}
 }
+
+/* =========================================================
+   Desktop — schermi larghi con puntatore preciso: la barra
+   diventa una colonna laterale e il contenuto si apre su due
+   colonne. Riconosciuto via viewport + hover, non user-agent:
+   un tablet in orizzontale con mouse ottiene la stessa resa.
+   ========================================================= */
+@media(min-width:960px) and (pointer:fine){
+  :root{--max:1060px; --side:232px}
+  html{overflow-y:scroll}
+  body{padding-left:var(--side);padding-bottom:28px}
+  .app{margin:0;padding-top:40px}
+
+  /* ---- colonna laterale (sostituisce la tab bar in basso) ---- */
+  .bottomnav{
+    left:0;right:auto;top:0;bottom:0;width:var(--side);height:100vh;
+    padding:max(30px, env(safe-area-inset-top)) 14px 24px;
+    display:flex;flex-direction:column;gap:2px;
+    border-top:none;border-right:1px solid var(--grid);
+    -webkit-backdrop-filter:none;backdrop-filter:none;background:var(--void);
+  }
+  .bottomnav::before{
+    content:"Cosmere Journey";display:block;font-family:var(--display);
+    font-size:19px;color:var(--light);letter-spacing:.01em;
+    padding:0 12px;margin-bottom:22px;
+  }
+  .navbtn{flex-direction:row;justify-content:flex-start;gap:12px;padding:10px 12px;border-radius:4px;transition:background-color .15s,color .15s}
+  .navbtn svg{width:19px;height:19px}
+  .navbtn:hover{color:var(--light);background:rgba(255,255,255,.035)}
+  .navbtn.active{background:var(--inst-soft)}
+  .navbtn.active:hover{color:var(--inst)}
+  .navbtn.active::before{content:none}
+  .navbtn.active::after{content:"";position:absolute;left:0;top:9px;bottom:9px;width:2px;border-radius:1px;background:var(--inst)}
+
+  .toast{left:calc(50% + calc(var(--side) / 2));bottom:28px;transform:translate(-50%,16px)}
+  .toast.show{transform:translate(-50%,0)}
+
+  /* ---- Home: carta+letture a sinistra, prossima tappa a destra ---- */
+  body[data-page="home"] .app{
+    display:grid;column-gap:36px;align-items:start;
+    grid-template-columns:minmax(300px,1fr) minmax(360px,1.2fr);
+    grid-template-areas:"topbar topbar" "intro intro" "chart next" "stats next" "divider divider";
+  }
+  body[data-page="home"] .topbar{grid-area:topbar}
+  body[data-page="home"] #home{grid-area:intro}
+  body[data-page="home"] #chart{grid-area:chart}
+  body[data-page="home"] .stats{grid-area:stats;margin-bottom:0}
+  body[data-page="home"] #journey{grid-area:next;align-self:start}
+  body[data-page="home"] .divider{grid-area:divider}
+
+  /* ---- Mondi: carta+letture a sinistra, catalogo a destra ---- */
+  body[data-page="worlds"] .app{
+    display:grid;column-gap:36px;align-items:start;
+    grid-template-columns:minmax(300px,1fr) minmax(380px,1.3fr);
+    grid-template-areas:"topbar topbar" "chart worlds" "stats worlds" "divider divider";
+  }
+  body[data-page="worlds"] .topbar{grid-area:topbar}
+  body[data-page="worlds"] #chart{grid-area:chart}
+  body[data-page="worlds"] .stats{grid-area:stats;margin-bottom:0}
+  body[data-page="worlds"] #worlds{grid-area:worlds}
+  body[data-page="worlds"] .divider{grid-area:divider}
+
+  /* ---- Blog: post in griglia a due colonne, come schede ---- */
+  .blog-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 26px}
+  .blog-post{border:1px solid var(--grid);border-radius:4px;padding:18px 18px 16px;align-items:start}
+  .blog-post:hover{border-color:var(--inst)}
+  .blog-post:last-child{border-bottom:1px solid var(--grid)}
+
+  /* ---- Percorso: libri in griglia a due colonne ---- */
+  .path{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 26px}
+  .book{border:1px solid var(--grid);border-radius:4px;padding:13px 14px}
+  .book:last-child{border-bottom:1px solid var(--grid)}
+  .filterbar{grid-column:1/-1}
+}
+@media(min-width:1240px) and (pointer:fine){
+  :root{--max:1160px}
+}
